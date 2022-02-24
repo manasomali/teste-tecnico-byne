@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*- 
 from flask import request, Blueprint
-from flask_restx import Api, Resource, fields
+from flask_restx import Api, Resource
 from random import randint
 from utils import writeLog
 
