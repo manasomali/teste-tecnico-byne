@@ -1,5 +1,6 @@
 from datetime import datetime
 import requests
+from app import URLBASE
 
 def writeLog(messege):
         f = open("log.txt", "a")
@@ -8,7 +9,7 @@ def writeLog(messege):
 
 
 def getKeys():
-    return requests.get('http://127.0.0.1:5000/api/registro').json()
+    return requests.get(URLBASE+'/api/registro').json()
 
 def registraUser(user):
-    return requests.put('http://127.0.0.1:5000/api/registro', data = {'user':user}).text
+    return requests.put(URLBASE+'/api/registro', data = {'user':user}).text

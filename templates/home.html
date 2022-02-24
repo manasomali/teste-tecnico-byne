@@ -61,7 +61,7 @@
             }, 500);
         }, false);
         function requestValue(user) {
-            fetch('http://127.0.0.1:5000/api/valorgeral')
+            fetch('https://teste-tecnico-byne.herokuapp.com/api/valorgeral')
             .then(response => response.text())
             .then(texto => {
                 document.getElementById('valorgeral').innerHTML=JSON.parse(texto)[user]
@@ -70,7 +70,7 @@
             .catch(err => console.log(err.message))
         }
         function incrementValue(user, valor) {
-            fetch('http://127.0.0.1:5000/api/valorgeral', {
+            fetch('https://teste-tecnico-byne.herokuapp.com/api/valorgeral', {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
@@ -82,7 +82,7 @@
         }
         
         function requestImparandIncrement(user) {
-            fetch('http://127.0.0.1:5000/api/impar')
+            fetch('https://teste-tecnico-byne.herokuapp.com/api/impar')
             .then(response => response.text())
             .then(texto => {
                 console.log('impar: '+texto)
@@ -91,7 +91,7 @@
             .catch(err => console.log(err.message))
         }
         function requestParandIncrement(user) {
-            fetch('http://127.0.0.1:5000/api/par')
+            fetch('https://teste-tecnico-byne.herokuapp.com/api/par')
             .then(response => response.text())
             .then(texto => {
                 console.log('par: '+texto)
