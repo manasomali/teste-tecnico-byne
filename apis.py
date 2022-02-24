@@ -16,7 +16,7 @@ class Impar(Resource):
                 impar = randint(0, 99)
             
             writeLog("Numero impar requisitado {0}".format(impar))
-            return {'numero':impar}
+            return impar
         except Exception as ex:
             return "Ocorreu excecao do tipo {0}. Argumentos: {1!r}".format(type(ex).__name__, ex.args)
 
@@ -29,7 +29,7 @@ class Par(Resource):
                 par = randint(0, 99)
             
             writeLog("Numero par requisitado {0}".format(par))
-            return {'numero':par}
+            return par
         except Exception as ex:
             return "Ocorreu excecao do tipo {0}. Argumentos: {1!r}".format(type(ex).__name__, ex.args)
 
