@@ -1,0 +1,13 @@
+{% block content %}
+    <div>
+        <h1>Teste Técnico BYNE</h1>
+        <h2>Registro</h2>
+        <form action="{{ url_for('registro') }}" method="post">
+            <input autocomplete="off" required autofocus name="name" placeholder="Nome" type="text">
+            <input type="submit" value="Register">
+        </form>
+        <form action="{{ url_for('login') }}" method="get">
+            <h3>Já tem Registro? <input type="submit" value="Login"></h3>
+        </form>
+    </div>
+{% endblock content %}
