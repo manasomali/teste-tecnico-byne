@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*- 
 from flask import Flask, render_template, redirect, request, session
-from core.utils import writeLog, getKeys, registraUser
+from utils import writeLog, getKeys, registraUser
 from apis import blueprint as api
 
 app = Flask(__name__)

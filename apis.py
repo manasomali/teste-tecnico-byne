@@ -2,7 +2,7 @@
 from flask import request, Blueprint
 from flask_restx import Api, Resource, fields
 from random import randint
-from core.utils import writeLog
+from utils import writeLog
 
 blueprint = Blueprint('api', __name__)
 api = Api(blueprint)
