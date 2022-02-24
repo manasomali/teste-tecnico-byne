@@ -86,7 +86,7 @@
             .then(response => response.text())
             .then(texto => {
                 console.log('impar: '+texto)
-                incrementValue(user, valor)
+                incrementValue(user, texto)
             })
             .catch(err => console.log(err.message))
         }
@@ -95,7 +95,7 @@
             .then(response => response.text())
             .then(texto => {
                 console.log('par: '+texto)
-                incrementValue(user, valor)
+                incrementValue(user, texto)
             })
             .catch(err => console.log(err.message))
         }
