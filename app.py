@@ -5,7 +5,6 @@ from apis import blueprint as api
 
 app = Flask(__name__)
 app.register_blueprint(api, url_prefix='/api')
-app.config['RESTX_VALIDATE'] = True
 app.secret_key = '\xd91t\xfd_\xbb\xfc\x0b\xc2\xea\xcclg\x9f\xadu\xd1\xf6\xd9\xc5\x85f5\x17'
 URLBASE="https://teste-tecnico-byne.herokuapp.com"
 
