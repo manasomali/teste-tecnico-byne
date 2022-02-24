@@ -1,6 +1,6 @@
 from datetime import datetime
 import requests
-from app import URLBASE
+URLBASE="https://teste-tecnico-byne.herokuapp.com"
 
 def writeLog(messege):
         f = open("log.txt", "a")
