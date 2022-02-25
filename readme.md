@@ -89,7 +89,7 @@ app.config.from_object("config.TestingConfig")
 ```
 $ python app.py
 ```
-### Run flask for develop
+
 No flask, porta padrão é `5000`
 
 Pagina de documentação Swagger:  `http://127.0.0.1:5000/api/`
