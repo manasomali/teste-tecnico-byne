@@ -40,9 +40,12 @@ class Par(Resource):
 @api.route('/getvalorgeral', doc={"description": "Retorna valor geral de todos os users"})
 class GetValorGeral(Resource):
     def get(self):
-        dados=database.getData()
-        logging.warning("Numero geral requisitado -> %s",dados)
-        return dados
+        try:
+            dados=database.getData()
+            logging.warning("Numero geral requisitado -> %s",dados)
+            return dados
+        except:
+            return None
 
 @api.route('/putvalorgeral', doc={"description": "Incrementa valor de determinado user"})
 class PutValorGeral(Resource):
