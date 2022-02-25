@@ -70,21 +70,6 @@ $ pip install -r requirements.txt
 - login.html -> HTML da página de login.
 - registro.html -> HTML da página de 
 
-### Configuração
-No app.py:
-- Para ambiente de desenvolvimento
-```
-app.config.from_object("config.DevelopmentConfig")
-```
-- Para ambiente de produção
-```
-app.config.from_object("config.ProductionConfig")
-```
-- Para ambiente de teste
-```
-app.config.from_object("config.TestingConfig")
-```
-
 ## Run Flask
 ```
 $ python app.py
