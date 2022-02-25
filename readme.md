@@ -59,16 +59,16 @@ $ pip install -r requirements.txt
 
 - app.py -> Códigos relacionados a parte de 
 - api.py -> Códigos relacionados a API.
-- config.py -> Classe para definir diferentes 
-- utils.py -> Classe para manusear o JSON com 
+- utils.py -> Classe para manusear o JSON.
 - data.json -> JSON para armazenar os dados.
-- logs.log -> Log das interações entre o 
-- Procfile -> Arquivo relacionado ao deploy no 
+- logs.log -> Log das interações entre o cliente e o servidor.
+- Procfile -> Arquivo relacionado ao deploy no Heroku.
 - requirements.txt -> Requerimentos do sistema.
-- readme.md -> Leia-me
+- readme.md -> Leia-me.
+- .gitignore -> Lista de arquivos ignorados pelo rep.
 - home.html -> HTML da página princial, com 
 - login.html -> HTML da página de login.
-- registro.html -> HTML da página de 
+- registro.html -> HTML da página de registro.
 
 ## Run Flask
 ```
