@@ -79,6 +79,11 @@ No flask, porta padrão é `5000`
 
 Pagina de documentação Swagger:  `http://127.0.0.1:5000/api/`
 
+## Configuração
+
+Importante definir corretamente o app.config['BASE_URL']:
+- Se estiver no local: app.config['BASE_URL'] = `'http://127.0.0.1:5000/'`
+
 ### Deploy com Heroku
 
 1. Fazer cadastro no Heroku.
