@@ -60,41 +60,40 @@
                 cont = cont + 0.5
             }, 500);
         }, false);
+
         function requestValue(user) {
-            fetch('https://teste-tecnico-byne.herokuapp.com/api/valorgeral')
+            fetch(`{{ base_url }}/api/getvalorgeral`)
             .then(response => response.text())
             .then(texto => {
-                document.getElementById('valorgeral').innerHTML=JSON.parse(texto)[user]
-                console.log('valorgeral: ' + texto)
+                if (JSON.parse(texto)[user] != undefined) {
+                    document.getElementById('valorgeral').innerHTML=JSON.parse(texto)[user]
+                }
             })
             .catch(err => console.log(err.message))
         }
         function incrementValue(user, valor) {
-            fetch('https://teste-tecnico-byne.herokuapp.com/api/valorgeral', {
+            fetch(`{{ base_url }}/api/putvalorgeral`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 body: `increment=${valor}&user=${user}`,
             }).then(response => response.text())
-            .then(texto => console.log('valorgeral: '+texto))
             .catch(err => console.log(err.message))
         }
         
         function requestImparandIncrement(user) {
-            fetch('https://teste-tecnico-byne.herokuapp.com/api/impar')
+            fetch(`{{ base_url }}/api/impar`)
             .then(response => response.text())
             .then(texto => {
-                console.log('impar: '+texto)
                 incrementValue(user, texto)
             })
             .catch(err => console.log(err.message))
         }
         function requestParandIncrement(user) {
-            fetch('https://teste-tecnico-byne.herokuapp.com/api/par')
+            fetch(`{{ base_url }}/api/par`)
             .then(response => response.text())
             .then(texto => {
-                console.log('par: '+texto)
                 incrementValue(user, texto)
             })
             .catch(err => console.log(err.message))
