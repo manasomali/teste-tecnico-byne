@@ -5,7 +5,12 @@ import requests
 import logging
 
 app = Flask(__name__)
-app.config.from_object("config.ProductionConfig")
+app.config['BASE_URL']="https://teste-tecnico-byne.herokuapp.com"
+#app.config['BASE_URL']="http://127.0.0.1:5000"
+app.config['TESTING'] = False
+app.config['DEBUG'] = False
+app.config['SECRET_KEY'] = '\xd91t\xfd_\xbb\xfc\x0b\xc2\xea\xcclg\x9f\xadu\xd1\xf6\xd9\xc5\x85f5\x17'
+
 logging.basicConfig(format='%(asctime)s -> %(message)s', filename='logs.log', level=logging.WARNING)
 logging.getLogger('werkzeug').disabled = True
 
