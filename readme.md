@@ -13,7 +13,7 @@
 
 ## Descrição
 
-Sistema com Flask para construir uma API com flask-restx, com documentação Swagger. A API funciona 100% desacoplada do APP.
+Sistema com Flask para construir uma API com flask-restx, com documentação Swagger. A API funciona 100% desacoplada do APP (verificar página de documentação Swagger).
 
 No lado do cliente, foi somente explorado html e javascript.
 
@@ -94,7 +94,7 @@ app.config['BASE_URL'] = 'http://127.0.0.1:5000/'
 3. Indicar repositório.
 4. Deploy automático ou manual.
 
-Pagina de documentação Swagger:  `teste-tecnico-byne.herokuapp.com/api/`
+Página de documentação Swagger:  `teste-tecnico-byne.herokuapp.com/api/`
 
 ## Referências
 
