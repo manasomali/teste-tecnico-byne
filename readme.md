@@ -61,7 +61,7 @@ Página de documentação Swagger:  `http://127.0.0.1:5000/api/`
 
 Sistema com desenvolvido em `Flask` para construir uma API com `flask-restx` com documentação Swagger.
 
-A API funciona 100% desacoplada do APP (verificar [Swagger]((http://teste-tecnico-byne.herokuapp.com/api/))).
+A API funciona 100% desacoplada do APP (verificar [Swagger](http://teste-tecnico-byne.herokuapp.com/api/)).
 
 No lado do cliente, foi somente explorado `html` e `javascript`.
 
