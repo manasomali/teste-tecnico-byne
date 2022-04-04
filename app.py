@@ -31,32 +31,32 @@ def login():
             logging.warning("Usuario %s logado", session["name"])
             return redirect("/")
 
-        return redirect("/registro")
+        return redirect("/register")
     return render_template('login.html')
 
-@app.route('/registro', methods=["GET", "POST"])
-def registro():
+@app.route('/register', methods=["GET", "POST"])
+def register():
     if request.method == "POST":
         if request.form.get("name") in getKeys():
             return redirect("/login")
     
         session["name"] = request.form.get("name")
-        registraUser(request.form.get("name"))
-        logging.warning("Usuario %s registrado", session["name"])
+        registerUser(request.form.get("name"))
+        logging.warning("User %s registred", session["name"])
         return redirect("/")
-    return render_template('registro.html')
+    return render_template('register.html')
 
 @app.route('/logout', methods=["GET", "POST"])
 def logout():
-    logging.warning("Usuario %s logout", session["name"])
+    logging.warning("User %s logout", session["name"])
     session.clear()
     return redirect("/")
 
 def getKeys():
-    return requests.get(app.config['BASE_URL']+'/api/registro').json()
+    return requests.get(app.config['BASE_URL']+'/api/register').json()
 
-def registraUser(user: str):
-    return requests.put(app.config['BASE_URL']+'/api/registro', data = {'user':user}).text
+def registerUser(user: str):
+    return requests.put(app.config['BASE_URL']+'/api/register', data = {'user':user}).text
 
 if __name__ == '__main__':
     app.run()

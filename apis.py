@@ -13,58 +13,58 @@ api = Api(blueprint)
 database = DataModifier('data.json')
 
 parser = reqparse.RequestParser()
-parser.add_argument('user', type=str, help='Informe user')
-parser.add_argument('increment', type=int, help='Informe incremento')
+parser.add_argument('user', type=str, help='User needed')
+parser.add_argument('increment', type=int, help='Increment needed')
 
 
-@api.route('/impar', doc={"description": "Gera numero impar aletorio entre 0 e 99"})
-class Impar(Resource):
+@api.route('/odd', doc={"description": "Generate a randon odd number betewen 0 and 99"})
+class Odd(Resource):
     def get(self):
-        impar = 0
-        while (impar % 2) == 0:
-            impar = randint(0, 99)
+        odd = 0
+        while (odd % 2) == 0:
+            odd = randint(0, 99)
 
-        logging.warning("Numero impar requisitado -> %s",impar)
-        return impar
+        logging.warning("Odd number requisited -> %s", odd)
+        return odd
 
-@api.route('/par', doc={"description": "Gera numero par aletorio entre 0 e 99"})
-class Par(Resource):
+@api.route('/even', doc={"description": "Generate a randon even number betewen 0 and 99"})
+class Even(Resource):
     def get(self):
-        par = 1
-        while (par % 2) != 0:
-            par = randint(0, 99)
+        even = 1
+        while (even % 2) != 0:
+            even = randint(0, 99)
 
-        logging.warning("Numero par requisitado ->  %s",par)
-        return par
+        logging.warning("Even number requisited ->  %s", even)
+        return even
 
-@api.route('/getvalorgeral', doc={"description": "Retorna valor geral de todos os users"})
-class GetValorGeral(Resource):
+@api.route('/getgeneralvalue', doc={"description": "Returns the general value of all users"})
+class GetGeneralValue(Resource):
     def get(self):
         try:
             dados=database.getData()
-            logging.warning("Numero geral requisitado -> %s",dados)
+            logging.warning("Request general numbers -> %s",dados)
             return dados
         except:
             return None
 
-@api.route('/putvalorgeral', doc={"description": "Incrementa valor de determinado user"})
-class PutValorGeral(Resource):
-    @api.doc(params={'user': 'Nome do usuario para registro', 'increment': 'Valor a ser incrementado'})
+@api.route('/putgeneralvalue', doc={"description": "Increment general value of determined user"})
+class PutGeneralValue(Resource):
+    @api.doc(params={'user': 'User name to register', 'increment': 'Value to be incremented'})
     def put(self):
         user=parser.parse_args().get('user')
         increment=parser.parse_args().get('increment')
         database.updateData(user, increment)
-        logging.warning("Numero geral incrementado por %s -> %s",user,increment)
+        logging.warning("General number incremented by %s -> %s",user,increment)
         return database.getData()[user]
         
-@api.route('/registro', doc={"description": "Caso GET, retorna os users cadastrados e caso PUT registra um user novo"})
+@api.route('/register', doc={"description": "Case GET, returns registred users and case PUT register a new user"})
 class Registra(Resource):
     def get(self):
         return list(database.getData().keys())
 
-    @api.doc(params={'user': 'Nome do usuário para registro'})
+    @api.doc(params={'user': 'User name to register'})
     def put(self):
         user=parser.parse_args().get('user')
         database.addData(user)
-        logging.warning("Usuário %s registrado",user)
+        logging.warning("User %s registred successfully",user)
         return 0
