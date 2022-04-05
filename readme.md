@@ -96,7 +96,7 @@ Todas as mensagens trocadas entre o cliente e servidor são registradas em `logs
 | |────templates/
 | |──────home.html
 | |──────login.html
-| |──────registro.html
+| |──────register.html
 ```
 ## Descrição dos Arquivos
 
@@ -111,7 +111,7 @@ Todas as mensagens trocadas entre o cliente e servidor são registradas em `logs
 - .gitignore -> Lista de arquivos ignorados pelo rep.
 - home.html -> HTML da página princial, com 
 - login.html -> HTML da página de login.
-- registro.html -> HTML da página de registro.
+- register.html -> HTML da página de registro.
 
 ## Deploy com Heroku
 
