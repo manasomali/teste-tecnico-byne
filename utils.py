@@ -1,7 +1,9 @@
 import json
+import requests
 from typing import Dict
 
-class DataModifier():
+
+class DataModifier:
     def __init__(self, filename):
         self.filename: str = filename
 
@@ -22,3 +24,13 @@ class DataModifier():
         data[user] = data[user] + increment
         with open(self.filename, "w+") as read_file:
             json.dump(data, read_file, indent=4)
+
+
+def getKeys(app):
+    return requests.get(app.config["BASE_URL"] + "/api/register").json()
+
+
+def registerUser(app, user: str):
+    return requests.put(
+        app.config["BASE_URL"] + "/api/register", data={"user": user}
+    ).text
