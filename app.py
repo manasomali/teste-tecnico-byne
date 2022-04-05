@@ -5,8 +5,8 @@ from apis import blueprint as api
 from utils import getKeys, registerUser
 
 app = Flask(__name__)
-# app.config['BASE_URL'] = 'https://teste-tecnico-byne.herokuapp.com'
-app.config["BASE_URL"] = "http://127.0.0.1:5000"
+app.config['BASE_URL'] = 'https://teste-tecnico-byne.herokuapp.com'
+# app.config["BASE_URL"] = "http://127.0.0.1:5000"
 app.config["TESTING"] = False
 app.config["DEBUG"] = False
 app.config[
