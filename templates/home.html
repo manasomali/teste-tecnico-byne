@@ -62,7 +62,7 @@
         }, false);
 
         function requestValue(user) {
-            fetch(`{{ base_url }}/api/getvalorgeral`)
+            fetch(`{{ base_url }}/api/getgeneralvalue`)
             .then(response => response.text())
             .then(texto => {
                 if (JSON.parse(texto)[user] != undefined) {
@@ -72,7 +72,7 @@
             .catch(err => console.log(err.message))
         }
         function incrementValue(user, valor) {
-            fetch(`{{ base_url }}/api/putvalorgeral`, {
+            fetch(`{{ base_url }}/api/putgeneralvalue`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
@@ -83,7 +83,7 @@
         }
         
         function requestImparandIncrement(user) {
-            fetch(`{{ base_url }}/api/impar`)
+            fetch(`{{ base_url }}/api/odd`)
             .then(response => response.text())
             .then(texto => {
                 incrementValue(user, texto)
@@ -91,7 +91,7 @@
             .catch(err => console.log(err.message))
         }
         function requestParandIncrement(user) {
-            fetch(`{{ base_url }}/api/par`)
+            fetch(`{{ base_url }}/api/even`)
             .then(response => response.text())
             .then(texto => {
                 incrementValue(user, texto)
