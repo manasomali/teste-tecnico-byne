@@ -3,24 +3,24 @@ from flask import Flask, render_template, redirect, request, session
 from utils import LoggingModifier, RequestsManager
 
 class Application:
-    def __init__(self, base_url="http://localhost:8000/", testing=False, debuging=False):
-        self.application = Flask(__name__)
-        self.application.config["BASE_URL"] = base_url
-        self.application.config["TESTING"] = testing
-        self.application.config["DEBUG"] = debuging
-        self.application.config[
+    def __init__(self, base_url="http://127.0.0.1:5000/", testing=False, debuging=False):
+        self.app = Flask(__name__)
+        self.app.config["BASE_URL"] = base_url
+        self.app.config["TESTING"] = testing
+        self.app.config["DEBUG"] = debuging
+        self.app.config[
             "SECRET_KEY"
         ] = "\xd91t\xfd_\xbb\xfc\x0b\xc2\xea\xcclg\x9f\xadu\xd1\xf6\xd9\xc5\x85f5\x17"
 
     def run(self):
-        self.application.run(host=self.application.config["BASE_URL"])
+        self.app.run()
         
 
     def register_blueprint(self, api, prefix):
-        self.application.register_blueprint(api, url_prefix=prefix)
+        self.app.register_blueprint(api, url_prefix=prefix)
 
     def setup_routes(self, log_mod: LoggingModifier, req_man: RequestsManager):
-        @self.application.route("/", methods=["GET", "POST"])
+        @self.app.route("/", methods=["GET", "POST"])
         def index():
             if not session.get("name"):
                 return redirect("/login")
@@ -28,10 +28,10 @@ class Application:
             return render_template(
                 "home.html",
                 nome=session.get("name"),
-                base_url=self.application.config["BASE_URL"],
+                base_url=self.app.config["BASE_URL"],
             )
 
-        @self.application.route("/login", methods=["GET", "POST"])
+        @self.app.route("/login", methods=["GET", "POST"])
         def login():
             if request.method == "POST":
                 if request.form.get("name") in req_man.get_users_keys():
@@ -42,7 +42,7 @@ class Application:
                 return redirect("/register")
             return render_template("login.html")
 
-        @self.application.route("/register", methods=["GET", "POST"])
+        @self.app.route("/register", methods=["GET", "POST"])
         def register():
             if request.method == "POST":
                 if request.form.get("name") in req_man.get_users_keys():
@@ -54,7 +54,7 @@ class Application:
                 return redirect("/")
             return render_template("register.html")
 
-        @self.application.route("/logout", methods=["GET", "POST"])
+        @self.app.route("/logout", methods=["GET", "POST"])
         def logout():
             log_mod.write_message("User {} logout".format(session["name"]))
             session.clear()
