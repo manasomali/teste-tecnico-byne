@@ -1,0 +1,105 @@
+{% block content %}
+    <div>
+        <div>
+            <h1>
+                Teste Técnico BYNE
+                <form action="{{ url_for('logout') }}" method="post" style="float: right;">
+                    <input type="submit" value="Logout">
+                </form>
+            </h1>
+        </div>
+        <div>
+            <ul>
+                <li>Servidor deve implementar dois serviços: Um que retorne números pares, e outro números ímpares;</li>
+                <li>Cada cliente ao se conectar ao servidor deve iniciar um processo que incrementa o valor recebido do servidor em 1 a cada 500ms, enviando o novo valor ao servidor;</li>
+                <li>Cada cliente deve, em um intervalo aleatório entre 3 e 5 segundos, requisitar ao servidor um número par ou ímpar, escolhido de forma aleatória, que será utilizado como novo valor de incremento, ao invés de 1;</li>
+                <li>Os números devem estar sempre no range 0-99;</li>
+                <li>Servidor deve enviar um valor ao aceitar conexão do cliente;</li>
+                <li>Servidor deve manter o último valor enviado para cada cliente. Caso um mesmo cliente se conecte, enviar esse valor para o mesmo. Caso não haja valor registrado, enviar 0;</li>
+                <li>Servidor deve manter um log de todas as mensagens trocadas;</li>
+                <li>Você pode utilizar qualquer linguagem/framework que se sentir mais confortável.</li>
+                <li>A entrega deve ser feita através de um repositório git público de sua escolha;</li>
+                <li>A data limite é até 28/02/22 às 23:59:59.</li>
+            </ul>
+        </div>
+        <div>
+            <table>
+                <thead>
+                  <tr>
+                    <th>Usuário</th>
+                    <th>Valor</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <tr>
+                     <td> {{ nome }} </td>
+                     <td id="valorgeral"></td>
+                 </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            var user = '{{ nome }}';
+            var rand3to5 = getRndInteger(3,5)
+            var cont = 0
+            var intervalo500ms = setInterval(function() {
+                if(cont == rand3to5) {
+                    cont=0
+                    rand3to5 = getRndInteger(3,5)
+                    if(getRndInteger(0,1)==1) {
+                        requestImparandIncrement(user)
+                    } else {
+                        requestParandIncrement(user)
+                    }
+                } else {
+                    incrementValue(user, 1)
+                }
+                requestValue(user)
+                cont = cont + 0.5
+            }, 500);
+        }, false);
+
+        function requestValue(user) {
+            fetch(`{{ base_url }}/api/getgeneralvalue`)
+            .then(response => response.text())
+            .then(texto => {
+                if (JSON.parse(texto)[user] != undefined) {
+                    document.getElementById('valorgeral').innerHTML=JSON.parse(texto)[user]
+                }
+            })
+            .catch(err => console.log(err.message))
+        }
+        function incrementValue(user, valor) {
+            fetch(`{{ base_url }}/api/putgeneralvalue`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `increment=${valor}&user=${user}`,
+            }).then(response => response.text())
+            .catch(err => console.log(err.message))
+        }
+        
+        function requestImparandIncrement(user) {
+            fetch(`{{ base_url }}/api/odd`)
+            .then(response => response.text())
+            .then(texto => {
+                incrementValue(user, texto)
+            })
+            .catch(err => console.log(err.message))
+        }
+        function requestParandIncrement(user) {
+            fetch(`{{ base_url }}/api/even`)
+            .then(response => response.text())
+            .then(texto => {
+                incrementValue(user, texto)
+            })
+            .catch(err => console.log(err.message))
+        }
+        function getRndInteger(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) ) + min;
+        }
+    </script>
+{% endblock content %}
