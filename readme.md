@@ -15,17 +15,27 @@
 
 ## Introdução
 
-Assume-se que já tenha instalado Python e pip e que o sistema seja Windows.
+Assume-se que já tenha instalado Python e pip.
 
 [Flask](https://flask.palletsprojects.com/en/2.0.x/) é um micro framework que utiliza a linguagem [Python](https://www.python.org/) para criar aplicativos Web. Foi criado em 2010 e é baseado no kit de ferramentas [Werkzeug](https://werkzeug.palletsprojects.com/en/2.0.x/) [WSGI](https://wsgi.readthedocs.io/en/latest/) e na biblioteca [Jinja2](https://jinja.palletsprojects.com/en/3.0.x/).
 
 ## Reprodução
 
-Inicia-se criando um ambiente de desenvolvimento virtual. Para criar um ambiente chamado "venv" e ativa-lo:
+Inicia-se criando um ambiente de desenvolvimento virtual. Para criar um ambiente chamado "venv":
 
 ```
+$ cd teste-tecnico-byne/
 $ python -m venv venv
+```
+
+Então ativa-lo:
+Windows:
+```
 $ venv\Scripts\activate
+```
+MacOs:
+```
+$ source venv/bin/activate
 ```
 
 Quanto terminar, para desativar o ambiente:
@@ -40,19 +50,23 @@ Após criar o ambiente virtual é necessário instalar os requerimentos:
 $ pip install -r requirements.txt
 ```
 
-Antes de rodar o projeto localmente é importante definir corretamente a url base com a variavel `app.config['BASE_URL']` no arquivo `app.py`:
-
-```
-app.config['BASE_URL'] = 'http://127.0.0.1:5000/'
-```
-
 Então, finalmente para rodar o projeto flask localmente:
 
 ```
-$ python app.py
+$ python run.py
 ```
 
 No flask, porta padrão é `5000` e para acessar o sistema: [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
+
+É possivel alterar o host e a porta padrão por meio dos argumentos "--host" e "--port", para mais informações, executar o comendo:
+
+```
+$ python run.py --help
+```
+
+OBS: É necessário criar um arquivo .env para definir a secret_key do seu projeto, por exemplo:
+
+SECRET_KEY=[jooj](https://www.youtube.com/watch?v=Tgpd--iDqd4)
 
 Página de documentação Swagger:  `http://127.0.0.1:5000/api/`
 
@@ -79,11 +93,13 @@ Todas as mensagens trocadas entre o cliente e servidor são registradas em `logs
 - [Werkzeug](https://werkzeug.palletsprojects.com/en/2.0.x/)
 - [flask-restx](https://flask-restx.readthedocs.io/en/latest/)
 - [requests](https://docs.python-requests.org/en/latest/)
+- [python-dotenv](https://pypi.org/project/python-dotenv/)
 
 ## Estrutura do Sistema
 ```
 .
 |──────teste-tecnico-byne/
+| |────run.py
 | |────app.py
 | |────api.py
 | |────config.py
@@ -100,7 +116,8 @@ Todas as mensagens trocadas entre o cliente e servidor são registradas em `logs
 ```
 ## Descrição dos Arquivos
 
-- app.py -> Códigos relacionados a parte de 
+- run.py -> Arquivo para iniciação do pacote e suas variáveis.
+- app.py -> Códigos relacionados a parte do flask.
 - api.py -> Códigos relacionados a API.
 - utils.py -> Classe para manusear o JSON.
 - data.json -> JSON para armazenar os dados.
