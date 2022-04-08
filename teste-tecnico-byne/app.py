@@ -2,19 +2,22 @@
 from flask import Flask, render_template, redirect, request, session
 from utils import LoggingModifier, RequestsManager
 
+
 class Application:
-    def __init__(self, base_url="http://127.0.0.1:5000/", testing=False, debuging=False):
+    def __init__(self, host, port, secret_key, testing=False, debuging=False):
         self.app = Flask(__name__)
-        self.app.config["BASE_URL"] = base_url
+        self.app.config["HOST"] = host
         self.app.config["TESTING"] = testing
         self.app.config["DEBUG"] = debuging
-        self.app.config[
-            "SECRET_KEY"
-        ] = "\xd91t\xfd_\xbb\xfc\x0b\xc2\xea\xcclg\x9f\xadu\xd1\xf6\xd9\xc5\x85f5\x17"
+        self.app.config["PORT"] = port
+        self.app.config["SECRET_KEY"] = secret_key
 
     def run(self):
-        self.app.run()
-        
+        self.app.run(
+            host=self.app.config["HOST"],
+            port=self.app.config["PORT"],
+            debug=self.app.config["DEBUG"],
+        )
 
     def register_blueprint(self, api, prefix):
         self.app.register_blueprint(api, url_prefix=prefix)
@@ -28,7 +31,9 @@ class Application:
             return render_template(
                 "home.html",
                 nome=session.get("name"),
-                base_url=self.app.config["BASE_URL"],
+                base_url="http://{}:{}/".format(
+                    self.app.config["HOST"], self.app.config["PORT"]
+                ),
             )
 
         @self.app.route("/login", methods=["GET", "POST"])
@@ -36,7 +41,9 @@ class Application:
             if request.method == "POST":
                 if request.form.get("name") in req_man.get_users_keys():
                     session["name"] = request.form.get("name")
-                    log_mod.write_message("User {} login successfully".format(session["name"]))
+                    log_mod.write_message(
+                        "User {} login successfully".format(session["name"])
+                    )
                     return redirect("/")
 
                 return redirect("/register")
@@ -50,7 +57,9 @@ class Application:
 
                 session["name"] = request.form.get("name")
                 req_man.register_user(request.form.get("name"))
-                log_mod.write_message("User {} registred".format(session["name"]))
+                log_mod.write_message(
+                    "User {} registred".format(session["name"])
+                )
                 return redirect("/")
             return render_template("register.html")
 
