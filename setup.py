@@ -8,7 +8,8 @@ setup(
     author="Matheus Nascimento S. M. de Lima",
     author_email="matheus.marques_96@hotmail.com",
     packages=find_packages(),
-    install_requires=["Flask",
+    install_requires=[
+        "Flask",
         "Click",
         "gunicorn",
         "itsdangerous",
@@ -18,6 +19,7 @@ setup(
         "requests",
         "MarkupSafe",
         "pip",
-        "setuptools"
-    ]
+        "setuptools",
+        "python-dotenv",
+    ],
 )
