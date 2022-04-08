@@ -152,3 +152,4 @@ cython_debug/
 
 .log
 .json
+*.vscode
