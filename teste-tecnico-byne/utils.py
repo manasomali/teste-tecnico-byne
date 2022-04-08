@@ -3,6 +3,7 @@ from typing import Dict
 import logging
 import requests
 
+
 class DataModifier:
     def __init__(self, filename):
         self.filename: str = filename
@@ -40,7 +41,7 @@ class LoggingModifier:
 
 
 class RequestsManager:
-    def __init__(self, base_url="http://127.0.0.1:5000/") -> None:
+    def __init__(self, base_url) -> None:
         self.base_url = base_url
 
     def get_users_keys(self):

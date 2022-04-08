@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import logging
 from random import randint
 from flask import Blueprint
 from flask_restx import Api, Resource, reqparse
@@ -17,7 +16,8 @@ parser.add_argument("increment", type=int, help="Increment needed")
 
 
 @api.route(
-    "/odd", doc={"description": "Generate a randon odd number betewen 0 and 99"}
+    "/odd",
+    doc={"description": "Generate a randon odd number betewen 0 and 99"},
 )
 class Odd(Resource):
     def get(self):
@@ -30,7 +30,8 @@ class Odd(Resource):
 
 
 @api.route(
-    "/even", doc={"description": "Generate a randon even number betewen 0 and 99"}
+    "/even",
+    doc={"description": "Generate a randon even number betewen 0 and 99"},
 )
 class Even(Resource):
     def get(self):
@@ -43,16 +44,14 @@ class Even(Resource):
 
 
 @api.route(
-    "/getgeneralvalue", doc={"description": "Returns the general value of all users"}
+    "/getgeneralvalue",
+    doc={"description": "Returns the general value of all users"},
 )
 class GetGeneralValue(Resource):
     def get(self):
-        try:
-            dados = database.get_data()
-            log_mod.write_message("Request general numbers -> {}".format(dados))
-            return dados
-        except:
-            return None
+        data = database.get_data()
+        log_mod.write_message("Request general numbers -> {}".format(data))
+        return data
 
 
 @api.route(
@@ -61,20 +60,25 @@ class GetGeneralValue(Resource):
 )
 class PutGeneralValue(Resource):
     @api.doc(
-        params={"user": "User name to register", "increment": "Value to be incremented"}
+        params={
+            "user": "User name to register",
+            "increment": "Value to be incremented",
+        }
     )
     def put(self):
         user = parser.parse_args().get("user")
         increment = parser.parse_args().get("increment")
         database.update_data(user, increment)
-        log_mod.write_message("General number incremented by {} -> {}".format(user, increment))
+        log_mod.write_message(
+            "General number incremented by {} -> {}".format(user, increment)
+        )
         return database.get_data()[user]
 
 
 @api.route(
     "/register",
     doc={
-        "description": "Case GET, returns registred users and case PUT register a new user"
+        "description": "GET: returns registred users. PUT: register new user"
     },
 )
 class Register(Resource):
