@@ -84,14 +84,14 @@ Os dados são armazenados no `data.json`.
 Todas as mensagens trocadas entre o cliente e servidor são registradas em `logs.log`.
 
 ### Rotas API
-
-- /odd
-- /even
-- /getgeneralvalue/ $\lt$ user $\gt$
-- /putgeneralvalue/ $\lt$ user $\gt$ / $\lt$ int:increment $\gt$
-- /getusers
-- /registeruser/ $\lt$ user $\gt$
-
+```
+/odd
+/even
+/getgeneralvalue/<user>
+/putgeneralvalue/<user>/<int:increment>
+/getusers
+/registeruser/<user>
+```
 ## Features
 
 - [Flask](https://flask.palletsprojects.com/en/2.0.x/)
