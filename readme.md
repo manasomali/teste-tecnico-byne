@@ -68,14 +68,12 @@ OBS: É necessário criar um arquivo .env para definir a secret_key do seu proje
 
 SECRET_KEY=[jooj](https://www.youtube.com/watch?v=Tgpd--iDqd4)
 
-Página de documentação Swagger:  `http://127.0.0.1:5000/api/`
-
 
 ## Descrição
 
-Sistema com desenvolvido em `Flask` para construir uma API com `flask-restx` com documentação Swagger.
+Sistema com desenvolvido em `Flask` para construir uma API e consumi-la.
 
-A API funciona 100% desacoplada do APP (verificar [Swagger](http://teste-tecnico-byne.herokuapp.com/api/)).
+A API funciona 100% desacoplada do APP (testar caminhos).
 
 No lado do cliente, foi somente explorado `html` e `javascript`.
 
@@ -85,13 +83,21 @@ Os dados são armazenados no `data.json`.
 
 Todas as mensagens trocadas entre o cliente e servidor são registradas em `logs.log`.
 
-## Features:
+### Rotas API
+
+- /odd
+- /even
+- /getgeneralvalue/<user>
+- /putgeneralvalue/<user>/<int:increment>
+- /getusers
+- /registeruser/<user>
+
+## Features
 
 - [Flask](https://flask.palletsprojects.com/en/2.0.x/)
 - [gunicorn](https://gunicorn.org)
 - [Jinja2](https://jinja.palletsprojects.com/en/3.0.x/)
 - [Werkzeug](https://werkzeug.palletsprojects.com/en/2.0.x/)
-- [flask-restx](https://flask-restx.readthedocs.io/en/latest/)
 - [requests](https://docs.python-requests.org/en/latest/)
 - [python-dotenv](https://pypi.org/project/python-dotenv/)
 
@@ -101,7 +107,6 @@ Todas as mensagens trocadas entre o cliente e servidor são registradas em `logs
 |──────teste-tecnico-byne/
 | |────run.py
 | |────app.py
-| |────api.py
 | |────config.py
 | |────utils.py
 | |────data.json
@@ -117,8 +122,7 @@ Todas as mensagens trocadas entre o cliente e servidor são registradas em `logs
 ## Descrição dos Arquivos
 
 - run.py -> Arquivo para iniciação do pacote e suas variáveis.
-- app.py -> Códigos relacionados a parte do flask.
-- api.py -> Códigos relacionados a API.
+- app.py -> Códigos relacionados a parte do flask (rotas e API).
 - utils.py -> Classe para manusear o JSON.
 - data.json -> JSON para armazenar os dados.
 - logs.log -> Log das interações entre o cliente e o servidor.

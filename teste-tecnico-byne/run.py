@@ -2,8 +2,7 @@ import argparse
 import os
 from dotenv import load_dotenv
 from app import Application
-from utils import LoggingModifier, RequestsManager
-from apis import blueprint as api
+from utils import LoggingModifier, RequestsManager, DataModifier
 
 load_dotenv(".env")
 if __name__ == "__main__":
@@ -27,10 +26,11 @@ if __name__ == "__main__":
         debuging=args.debugging,
         secret_key=os.getenv("SECRET_KEY"),
     )
-    app.register_blueprint(api, prefix="/api")
     log_mod = LoggingModifier(file_name="logs.log")
     req_man = RequestsManager(
         base_url="http://{}:{}/".format(args.host, args.port)
     )
+    data_base = DataModifier("data.json")
     app.setup_routes(log_mod, req_man)
+    app.setup_api(log_mod, data_base)
     app.run()
