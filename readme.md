@@ -87,10 +87,10 @@ Todas as mensagens trocadas entre o cliente e servidor são registradas em `logs
 
 - /odd
 - /even
-- /getgeneralvalue/<user>
-- /putgeneralvalue/<user>/<int:increment>
+- /getgeneralvalue/ $\lt$ user $\gt$
+- /putgeneralvalue/ $\lt$ user $\gt$ / $\lt$ int:increment $\gt$
 - /getusers
-- /registeruser/<user>
+- /registeruser/ $\lt$ user $\gt$
 
 ## Features
 
