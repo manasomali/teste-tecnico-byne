@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, redirect, request, session
-from utils import LoggingModifier, RequestsManager, DataModifier
+from utils import LoggingModifier, RequestsManager, MotorHandler
 from random import randint
 
 
@@ -70,11 +70,7 @@ class Application:
             session.clear()
             return redirect("/")
 
-    def setup_api(
-        self,
-        log_mod: LoggingModifier,
-        data_base: DataModifier,
-    ):
+    def setup_api(self, log_mod: LoggingModifier, db_hand: MotorHandler):
         @self.app.route("/odd", methods=["GET"])
         def odd():
             if request.method == "GET":
@@ -102,7 +98,7 @@ class Application:
         @self.app.route("/getgeneralvalue/<user>", methods=["GET"])
         def getgeneralvalue(user):
             if request.method == "GET":
-                data = data_base.get_data(user)
+                data = db_hand.get(user)
                 log_mod.write_message(
                     "User {} request general number -> {}".format(user, data)
                 )
@@ -113,24 +109,24 @@ class Application:
         )
         def putgeneralvalue(user, increment):
             if request.method == "GET":
-                data_base.update_data(user, increment)
+                db_hand.increment(user, increment)
                 log_mod.write_message(
                     "General number incremented by {} -> {}".format(
                         user, increment
                     )
                 )
-                return str(data_base.get_data(user))
+                return str(db_hand.get(user))
 
         @self.app.route("/getusers", methods=["GET"])
         def getusers():
             if request.method == "GET":
-                users_list = [*data_base.get_all_data()]
+                users_list = db_hand.get_all_users()
                 return str(users_list)
 
         @self.app.route("/registeruser/<user>", methods=["GET"])
         def registeruser(user):
             if request.method == "GET":
-                data_base.add_data(user)
+                db_hand.insert(user)
                 log_mod.write_message(
                     "User {} registred successfully".format(user)
                 )
