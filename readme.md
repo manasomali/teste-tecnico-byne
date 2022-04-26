@@ -1,4 +1,4 @@
-#  Teste Técnico BYNE
+# Teste Técnico BYNE
 
 ## Requisitos
 
@@ -29,11 +29,15 @@ $ python -m venv venv
 ```
 
 Então ativa-lo:
+
 Windows:
+
 ```
 $ venv\Scripts\activate
 ```
+
 MacOs:
+
 ```
 $ source venv/bin/activate
 ```
@@ -68,6 +72,12 @@ OBS: É necessário criar um arquivo .env para definir a secret_key do seu proje
 
 SECRET_KEY=[jooj](https://www.youtube.com/watch?v=Tgpd--iDqd4)
 
+Para a base de dados, foi explorado o uso do mongoDB com motor. Para funcionar é necessário definir as variaveis de ambiente usuário e senha do banco de dados. Para criar acessar o [link](https://www.mongodb.com/cloud/atlas/register2).
+
+DB_USER=user
+DB_PASS=password
+
+Quando for criar a base de dados no atlas, usar o nome "myFirstDatabase" para base de dados e "myCollection" para a collection. Caso use outro nome, aterar no arquivo run.py.
 
 ## Descrição
 
@@ -84,6 +94,7 @@ Os dados são armazenados no `data.json`.
 Todas as mensagens trocadas entre o cliente e servidor são registradas em `logs.log`.
 
 ### Rotas API
+
 ```
 /odd
 /even
@@ -92,6 +103,7 @@ Todas as mensagens trocadas entre o cliente e servidor são registradas em `logs
 /getusers
 /registeruser/<user>
 ```
+
 ## Features
 
 - [Flask](https://flask.palletsprojects.com/en/2.0.x/)
@@ -100,8 +112,10 @@ Todas as mensagens trocadas entre o cliente e servidor são registradas em `logs
 - [Werkzeug](https://werkzeug.palletsprojects.com/en/2.0.x/)
 - [requests](https://docs.python-requests.org/en/latest/)
 - [python-dotenv](https://pypi.org/project/python-dotenv/)
+- [motor](https://www.mongodb.com/docs/drivers/motor/)
 
 ## Estrutura do Sistema
+
 ```
 .
 |──────teste-tecnico-byne/
@@ -109,7 +123,7 @@ Todas as mensagens trocadas entre o cliente e servidor são registradas em `logs
 | |────app.py
 | |────config.py
 | |────utils.py
-| |────data.json
+| |────sample.env
 | |────logs.log
 | |────Procfile
 | |────requirements.txt
@@ -119,18 +133,19 @@ Todas as mensagens trocadas entre o cliente e servidor são registradas em `logs
 | |──────login.html
 | |──────register.html
 ```
+
 ## Descrição dos Arquivos
 
 - run.py -> Arquivo para iniciação do pacote e suas variáveis.
 - app.py -> Códigos relacionados a parte do flask (rotas e API).
-- utils.py -> Classe para manusear o JSON.
-- data.json -> JSON para armazenar os dados.
+- utils.py -> Classes auxiliares.
 - logs.log -> Log das interações entre o cliente e o servidor.
 - Procfile -> Arquivo relacionado ao deploy no Heroku.
 - requirements.txt -> Requerimentos do sistema.
+- sample.env -> Exemplo de variaveis de ambiente.
 - readme.md -> Leia-me.
 - .gitignore -> Lista de arquivos ignorados pelo rep.
-- home.html -> HTML da página princial, com 
+- home.html -> HTML da página princial, com
 - login.html -> HTML da página de login.
 - register.html -> HTML da página de registro.
 
@@ -146,3 +161,4 @@ Todas as mensagens trocadas entre o cliente e servidor são registradas em `logs
 - [Flask](http://flask.pocoo.org/)
 - [Heroku](https://devcenter.heroku.com/articles/getting-started-with-python)
 - [pythonise](https://pythonise.com/series/learning-flask/your-first-flask-app)
+- [motor](https://motor.readthedocs.io/en/stable/)

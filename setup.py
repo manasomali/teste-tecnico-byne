@@ -4,7 +4,7 @@ from setuptools import find_packages
 
 setup(
     name="teste-tecnico-byne",
-    version="0",
+    version="1",
     author="Matheus Nascimento S. M. de Lima",
     author_email="matheus.marques_96@hotmail.com",
     packages=find_packages(),
@@ -21,5 +21,9 @@ setup(
         "pip",
         "setuptools",
         "python-dotenv",
+        "motor",
+        "pymongo",
+        "dnspython",
+        "nest_asyncio",
     ],
 )

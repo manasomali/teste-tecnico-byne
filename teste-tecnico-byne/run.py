@@ -2,8 +2,10 @@ import argparse
 import os
 from dotenv import load_dotenv
 from app import Application
-from utils import LoggingModifier, RequestsManager, DataModifier
+from utils import LoggingModifier, RequestsManager, DataModifier, MotorHandler
+import nest_asyncio
 
+nest_asyncio.apply()
 load_dotenv(".env")
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process test and debug.")
@@ -31,6 +33,12 @@ if __name__ == "__main__":
         base_url="http://{}:{}/".format(args.host, args.port)
     )
     data_base = DataModifier("data.json")
+    db_hand = MotorHandler(
+        db_user=os.getenv("DB_USER"),
+        db_pass=os.getenv("DB_PASS"),
+        database="myFirstDatabase",
+        collection="myCollection",
+    )
     app.setup_routes(log_mod, req_man)
-    app.setup_api(log_mod, data_base)
+    app.setup_api(log_mod, db_hand)
     app.run()
