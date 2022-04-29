@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, redirect, request, session
-from utils import LoggingModifier, RequestsManager, MotorHandler
+from utils import LoggingModifier, RequestsManager
+from database import MotorHandler
 from random import randint
 
 
