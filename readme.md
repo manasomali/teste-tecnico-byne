@@ -123,6 +123,7 @@ Todas as mensagens trocadas entre o cliente e servidor são registradas em `logs
 | |────app.py
 | |────config.py
 | |────utils.py
+| |────database.py
 | |────sample.env
 | |────logs.log
 | |────Procfile
@@ -139,6 +140,7 @@ Todas as mensagens trocadas entre o cliente e servidor são registradas em `logs
 - run.py -> Arquivo para iniciação do pacote e suas variáveis.
 - app.py -> Códigos relacionados a parte do flask (rotas e API).
 - utils.py -> Classes auxiliares.
+- database.py -> Database class handler.
 - logs.log -> Log das interações entre o cliente e o servidor.
 - Procfile -> Arquivo relacionado ao deploy no Heroku.
 - requirements.txt -> Requerimentos do sistema.

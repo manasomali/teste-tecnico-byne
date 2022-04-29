@@ -2,7 +2,8 @@ import argparse
 import os
 from dotenv import load_dotenv
 from app import Application
-from utils import LoggingModifier, RequestsManager, DataModifier, MotorHandler
+from utils import LoggingModifier, RequestsManager
+from database import MotorHandler
 import nest_asyncio
 
 nest_asyncio.apply()
@@ -32,7 +33,6 @@ if __name__ == "__main__":
     req_man = RequestsManager(
         base_url="http://{}:{}/".format(args.host, args.port)
     )
-    data_base = DataModifier("data.json")
     db_hand = MotorHandler(
         db_user=os.getenv("DB_USER"),
         db_pass=os.getenv("DB_PASS"),
